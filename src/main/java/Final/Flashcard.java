@@ -1,37 +1,43 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+Jeremy Chen
+ADS Final
+Lewellen
+11/15/23
+Class for individual flashcard
  */
 package Final;
 
-/**
- *
- * @author jchen
- */
 public class Flashcard {
-    private int term;
-    private int definition;
+    // each flashcard has a term and a definition
+    private String term;
+    private String definition;
     
-    public Flashcard(int term, int definition) {
+    // constructor with term and definition
+    public Flashcard(String term, String definition) {
         this.term = term;
         this.definition = definition;
     }
-
-    public int getTerm() {
+    
+    // getters and setters
+    public String getTerm() {
         return term;
     }
 
-    public void setTerm(int term) {
+    public void setTerm(String term) {
         this.term = term;
     }
 
-    public int getDefinition() {
+    public String getDefinition() {
         return definition;
     }
 
-    public void setDefinition(int definition) {
+    public void setDefinition(String definition) {
         this.definition = definition;
     }
     
-    
+    // tostring that returns the flashcard in the form term:definition
+    @Override
+    public String toString() {
+        return term + ":" + definition;
+    }
 }
