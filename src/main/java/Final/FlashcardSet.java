@@ -20,16 +20,17 @@ public class FlashcardSet {
     
     // adds a flashcard to the set
     // doesn't execute if the term is already in the set
-    public void addFlashCard(String term, String definition) {
+    public boolean addFlashCard(String term, String definition) {
         // checks if term is in the set
         if (isTermInSet(term)) {
             System.out.println("term already in set");
-            return;
+            return false;
         }
         
         // make and add the flashcard
         Flashcard card = new Flashcard(term, definition);
         set.add(card);
+        return true;
     }
     
     // method that checks if the term is already used in the set
@@ -44,6 +45,18 @@ public class FlashcardSet {
         
         // otherwise, return false
         return false;
+    }
+    
+    public Flashcard getFlashcard(int index) {
+        return set.get(index);
+    }
+    
+    public int size() {
+        return set.size();
+    }
+    
+    public void removeFlashcard(int index) {
+        set.remove(index);
     }
     
     // quiz the user once

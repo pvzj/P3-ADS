@@ -7,25 +7,15 @@ Class to test flashcard
  */
 package Final;
 
+import javax.swing.SwingUtilities;
+
 public class Tester {
     public static void main(String[] args) {
-        // create set
-        FlashcardSet set = new FlashcardSet();
-        
-        // add elements
-        set.addFlashCard("a", "A");
-        // test case of existing term
-        set.addFlashCard("a", "B");
-        set.addFlashCard("c", "C");
-        set.addFlashCard("d", "D");
-        set.addFlashCard("e", "E");
-        
-//        System.out.println(set.set);
-        
         // infinitely study the set
-        while (true) {
-            set.study();
-        }
-        
+        GUI gui = new GUI();
+        SwingUtilities.invokeLater(() -> gui.init()); //create GUI
+//        while (true) {
+//            set.study();
+//        }
     }
 }
