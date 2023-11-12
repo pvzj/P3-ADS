@@ -16,7 +16,8 @@ import java.util.Scanner;
 // class that holds a set of flashcards
 public class FlashcardSet {
     // set that contains all the flashcards
-    public List<Flashcard> set = new ArrayList<>();
+    private List<Flashcard> set = new ArrayList<>();
+    private static int totalFlashcardsAdded = 0;
     
     // adds a flashcard to the set
     // doesn't execute if the term is already in the set
@@ -28,7 +29,8 @@ public class FlashcardSet {
         }
         
         // make and add the flashcard
-        Flashcard card = new Flashcard(term, definition);
+        Flashcard card = new Flashcard(term, definition, totalFlashcardsAdded);
+        totalFlashcardsAdded++;
         set.add(card);
         return true;
     }
@@ -57,6 +59,10 @@ public class FlashcardSet {
     
     public void removeFlashcard(int index) {
         set.remove(index);
+    }
+    
+    public List<Flashcard> getSet() {
+        return set;
     }
     
     // quiz the user once

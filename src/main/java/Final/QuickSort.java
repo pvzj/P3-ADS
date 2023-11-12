@@ -4,6 +4,8 @@
  */
 package Final;
 
+import java.util.List;
+
 public abstract class QuickSort {
     // main method, initiates recursion
     // takes in data to be sorted, and n, its length
@@ -12,7 +14,7 @@ public abstract class QuickSort {
     // returns true if a < b, false otherwise
     public abstract boolean compare(Flashcard a, Flashcard b);
     
-    public void sort(Flashcard[] data, int n) {
+    public void sort(List<Flashcard> data, int n) {
         // check if data is null
         if (data == null) {
             throw new NullPointerException("data is null");
@@ -27,7 +29,7 @@ public abstract class QuickSort {
     // n, which is the length of the section to be sorted
     // start, which is the starting index of the section to be sorted
     // returns nothing, sorts data in-place
-    private void sortRecursively(Flashcard[] data, int n, int start) {
+    private void sortRecursively(List<Flashcard> data, int n, int start) {
         // base cases:
         // if n is zero or one, then it is already sorted, so return
         if (n == 0 || n == 1) {
@@ -37,8 +39,8 @@ public abstract class QuickSort {
         // (if they aren't already sorted)
         
         if (n == 2) {
-            if (compare(data[start+1], data[start])){
-                swap(data, data.length, start, start+1);
+            if (compare(data.get(start+1), data.get(start))){
+                swap(data, data.size(), start, start+1);
             }
             return;
         }
@@ -77,7 +79,7 @@ public abstract class QuickSort {
     
     // takes in data, length (n) of relevant section, start index of section
     // returns index of the pivot
-    private int partition(Flashcard[] data, int n, int start) {
+    private int partition(List<Flashcard> data, int n, int start) {
         // pointers that move tot he middle of the array
         int leftPointer = start;
         int rightPointer = start+n-1;
@@ -91,11 +93,11 @@ public abstract class QuickSort {
             if (isPivotOnLeft) {
                 // if the data on the right is greater than pivot, 
                 // move the pointer down
-                if (compare(data[leftPointer], data[rightPointer])) {
+                if (compare(data.get(leftPointer), data.get(rightPointer))) {
                     rightPointer--;
                 } else {
                     // otherwise, swap the data points
-                    swap(data, data.length, 
+                    swap(data, data.size(), 
                             leftPointer, rightPointer);
                     // update the boolean tracker
                     isPivotOnLeft = false;
@@ -108,11 +110,11 @@ public abstract class QuickSort {
                 // if the data on the left is less than the pivot
 
                 // move the pointer up
-                if (compare(data[leftPointer], data[rightPointer])) {
+                if (compare(data.get(leftPointer), data.get(rightPointer))) {
                     leftPointer++;
                 } else {
                     // otherwise, swap the data pointers
-                    swap(data, data.length, 
+                    swap(data, data.size(), 
                             leftPointer, rightPointer);
                     // update the boolean tracker
                     isPivotOnLeft = true;
@@ -127,7 +129,7 @@ public abstract class QuickSort {
         return isPivotOnLeft ? leftPointer : rightPointer;
     }
     
-    public void swap(Flashcard[] data, int n,
+    public void swap(List<Flashcard> data, int n,
                             int idxA, int idxB) {
       // check if data is null
       if (data == null) {
@@ -140,10 +142,10 @@ public abstract class QuickSort {
       }
       
       // store temporary value so that it doesn't get erased from swap
-      Flashcard temp = data[idxA];
+      Flashcard temp = data.get(idxA);
       
       // perform swap 
-      data[idxA] = data[idxB];
-      data[idxB] = temp;
+      data.set(idxA, data.get(idxB));
+      data.set(idxB, temp);
    }
 }

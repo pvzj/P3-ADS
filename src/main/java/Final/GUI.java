@@ -25,6 +25,12 @@ public class GUI { //GUI for chessboard
     
     private static final Color TERM_COLOR = new Color(227, 234, 255);
     private static final Color DEF_COLOR = new Color(158, 181, 247);
+    private static final String[] possibleSorts = {
+        "oldest to newest",
+        "newest to oldest",
+        "alphabetical",
+        "shortest to longest term"
+    };
     public void init() { //create GUI
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel mainPanel = new JPanel();
@@ -37,7 +43,7 @@ public class GUI { //GUI for chessboard
         
         JPanel upperButtons = new JPanel();
         upperButtons.add(new JLabel("Sort by: "));
-        JComboBox dropdown = new JComboBox(new String[] {"alphabetical", "length"});
+        JComboBox dropdown = new JComboBox(possibleSorts);
         dropdown.addActionListener(new SortFlashcardsListener(dropdown));
         upperButtons.add(dropdown);
         JButton remove = new JButton("hi");
@@ -103,6 +109,7 @@ public class GUI { //GUI for chessboard
         Flashcard currentCard = set.getFlashcard(index);
         
         drawCard(currentCard.getTerm(), TERM_COLOR);
+        currentFlashcardIndex = index;
     }
     
     private void drawCard(String text, Color c) {
@@ -137,8 +144,8 @@ public class GUI { //GUI for chessboard
     }
     
     private void checkCardCycleAndDisplayCard() {
-        currentFlashcardIndex = Math.floorMod(currentFlashcardIndex, set.size());
-        drawCardGivenIndex(currentFlashcardIndex);
+        int index = Math.floorMod(currentFlashcardIndex, set.size());
+        drawCardGivenIndex(index);
     }
     
     private class CardActionListener implements ActionListener {
@@ -233,16 +240,29 @@ public class GUI { //GUI for chessboard
         public void actionPerformed(ActionEvent e) {
             String selectedItem = (String) dropdown.getSelectedItem();
             
-            Quicksort sort = new Quicksort();
-            
+            QuickSort sortingAlgorithm = null;
             switch(selectedItem) {
+                case "oldest to newest":
+                    System.out.println("oldest to newest");
+                    sortingAlgorithm = new OldestToNewestSort();
+                    break;
+                case "newest to oldest":
+                    System.out.println("newest to oldest");
+                    sortingAlgorithm = new NewestToOldestSort();
+                    break;
                 case "alphabetical":
                     System.out.println("alphabetical sort");
-                    
+                    sortingAlgorithm = new AlphabeticalSort();
                     break;
-                case "length":
-                    System.out.println("l");
+                case "shortest to longest term":
+                    System.out.println("shortest to longest");
+                    sortingAlgorithm = new LengthSort();
+                    break;
+                default:
+                    throw new IllegalArgumentException("selected item doesn't match");
             }
+            sortingAlgorithm.sort(set.getSet(), set.size());
+            drawCardGivenIndex(0);
         }
         
     }

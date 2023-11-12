@@ -11,11 +11,13 @@ public class Flashcard {
     // each flashcard has a term and a definition
     private String term;
     private String definition;
+    private int id;
     
     // constructor with term and definition
-    public Flashcard(String term, String definition) {
+    public Flashcard(String term, String definition, int id) {
         this.term = term;
         this.definition = definition;
+        this.id = id;
     }
     
     // getters and setters
@@ -23,16 +25,12 @@ public class Flashcard {
         return term;
     }
 
-    public void setTerm(String term) {
-        this.term = term;
-    }
-
     public String getDefinition() {
         return definition;
     }
 
-    public void setDefinition(String definition) {
-        this.definition = definition;
+    public int getID() {
+        return id;
     }
     
     // tostring that returns the flashcard in the form term:definition
