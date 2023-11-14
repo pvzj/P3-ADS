@@ -1,26 +1,30 @@
 /*
 Jeremy Chen
-ADS Final
+ADS : B Period
 Lewellen
 11/15/23
-Class for individual flashcard
+Class representing 1 individual flashcard
  */
+
 package Final;
 
 public class Flashcard {
     // each flashcard has a term and a definition
     private String term;
     private String definition;
+    
+    // id to keep track of when the flashcard was added to set
+    // lower is earlier
     private int id;
     
-    // constructor with term and definition
+    // constructor with term, definition, and id
     public Flashcard(String term, String definition, int id) {
         this.term = term;
         this.definition = definition;
         this.id = id;
     }
     
-    // getters and setters
+    // getters
     public String getTerm() {
         return term;
     }
@@ -34,6 +38,7 @@ public class Flashcard {
     }
     
     // tostring that returns the flashcard in the form term:definition
+    // used for testing
     @Override
     public String toString() {
         return term + ":" + definition;

@@ -1,6 +1,10 @@
-/* Jeremy Chen
- * October 30, 2023
- * Class implementing QuickSort
+/*
+Jeremy Chen
+ADS : B Period
+Lewellen
+11/15/23
+Class that implements the sorting framework for flashcard sorting
+Taken from Quick Sort assignment, modified to acommodate Lists of Flashcards
  */
 package Final;
 
@@ -10,8 +14,8 @@ public abstract class QuickSort {
     // main method, initiates recursion
     // takes in data to be sorted, and n, its length
     // returns nothing, sorts data in-place
-    
-    // returns true if a < b, false otherwise
+
+    // returns true if a should go before b, false otherwise
     public abstract boolean compare(Flashcard a, Flashcard b);
     
     public void sort(List<Flashcard> data, int n) {
@@ -37,6 +41,7 @@ public abstract class QuickSort {
         }
         // if n == 2, it can be sorted by swapping the elements 
         // (if they aren't already sorted)
+        // check if they are in order by using the overrided compare
         
         if (n == 2) {
             if (compare(data.get(start+1), data.get(start))){
@@ -91,9 +96,10 @@ public abstract class QuickSort {
             // if pivot is on the left, modify the right pointer
             // otherwise modify the left pointer
             if (isPivotOnLeft) {
-                // if the data on the right is greater than pivot, 
+                // if the data on the right goes after the pivot, 
                 // move the pointer down
-                if (compare(data.get(leftPointer), data.get(rightPointer))) {
+                if (compare(data.get(leftPointer), 
+                        data.get(rightPointer))) {
                     rightPointer--;
                 } else {
                     // otherwise, swap the data points
@@ -107,10 +113,10 @@ public abstract class QuickSort {
                 }
             } else {
                 // otheerwise, do the opposite as above
-                // if the data on the left is less than the pivot
-
+                // if the data on the left is goes before the pivot
                 // move the pointer up
-                if (compare(data.get(leftPointer), data.get(rightPointer))) {
+                if (compare(data.get(leftPointer),
+                        data.get(rightPointer))) {
                     leftPointer++;
                 } else {
                     // otherwise, swap the data pointers

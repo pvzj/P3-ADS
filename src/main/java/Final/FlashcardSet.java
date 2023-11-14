@@ -1,26 +1,29 @@
 /*
 Jeremy Chen
-ADS Final
+ADS : B Period
 Lewellen
 11/15/23
 Set of flashcard class
  */
+
 package Final;
 
 // import data structures
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
 
 // class that holds a set of flashcards
 public class FlashcardSet {
-    // set that contains all the flashcards
+    // list that contains all the flashcards
     private List<Flashcard> set = new ArrayList<>();
+    
+    // int that keeps track of the number of flashcards added
+    // use this to generate ids for cards
     private static int totalFlashcardsAdded = 0;
     
     // adds a flashcard to the set
     // doesn't execute if the term is already in the set
+    // takes in the term and definition, returns if the card was added or not
     public boolean addFlashCard(String term, String definition) {
         // checks if term is in the set
         if (isTermInSet(term)) {
@@ -29,13 +32,19 @@ public class FlashcardSet {
         }
         
         // make and add the flashcard
-        Flashcard card = new Flashcard(term, definition, totalFlashcardsAdded);
-        totalFlashcardsAdded++;
+        Flashcard card = 
+                new Flashcard(term, definition, totalFlashcardsAdded);
         set.add(card);
+        
+        // update trackers
+        totalFlashcardsAdded++;
+        
+        // return true to signify a successful add
         return true;
     }
     
-    // method that checks if the term is already used in the set
+    // method that checks if the inputted term is already used in the set
+    // returns true or false if it is in the set
     private boolean isTermInSet(String term) {
         // loop through each element in the set
         for (Flashcard f : set) {
@@ -49,43 +58,20 @@ public class FlashcardSet {
         return false;
     }
     
+    // getters
     public Flashcard getFlashcard(int index) {
         return set.get(index);
-    }
-    
-    public int size() {
-        return set.size();
     }
     
     public void removeFlashcard(int index) {
         set.remove(index);
     }
     
-    public List<Flashcard> getSet() {
-        return set;
+    public int size() {
+        return set.size();
     }
     
-    // quiz the user once
-    public void study() {
-        // pick a random element
-        Random r = new Random();
-        Flashcard currentCard = 
-                set.get(r.nextInt(set.size()));
-        
-        // print the current term
-        System.out.println(currentCard.getTerm());
-        
-        // scanner to read user input
-        // likely temporary
-        Scanner inputReader = new Scanner(System.in);
-        // check if response is correct
-        // if so, say correct
-        // if not, say wrong and print the actual answer
-        if (inputReader.nextLine().equals(currentCard.getDefinition())) {
-            System.out.println("Correct!");
-        } else {
-            System.out.println("Incorrect: Actual is " + 
-                    currentCard.getDefinition());
-        }
+    public List<Flashcard> getSet() {
+        return set;
     }
 }
